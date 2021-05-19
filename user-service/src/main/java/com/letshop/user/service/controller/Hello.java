@@ -6,9 +6,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class Hello {
 
-    @GetMapping
+    @GetMapping("/")
     public String welcome() {
         return "TEST HEROKU";
+    }
+
+    @GetMapping("/user-service/items")
+    public String items() {
+        return "ITEMS";
     }
 
 }
