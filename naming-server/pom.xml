@@ -12,7 +12,7 @@
     <artifactId>naming-server</artifactId>
 
     <properties>
-        <java.version>11</java.version>
+        <java.version>1.8</java.version>
         <spring-cloud.version>2020.0.2</spring-cloud.version>
     </properties>
 
@@ -54,6 +54,14 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.heroku.sdk</groupId>
+                <artifactId>heroku-maven-plugin</artifactId>
+                <version>3.0.3</version>
+                <configuration>
+                    <appName>letshop</appName>
+                </configuration>
             </plugin>
         </plugins>
     </build>
