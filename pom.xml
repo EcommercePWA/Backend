@@ -10,7 +10,6 @@
 		<module>payments-service</module>
 		<module>naming-server</module>
 		<module>spring-cloud-config-server</module>
-		<module>api-gateway</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -19,10 +18,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>shopnow</artifactId>
+	<artifactId>letshop</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>shopnow</name>
-	<description>Shopnow ecommerce application</description>
+	<name>LetShop</name>
+	<description>LetShop ecommerce application</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -51,7 +50,14 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>com.heroku.sdk</groupId>
+				<artifactId>heroku-maven-plugin</artifactId>
+				<version>3.0.3</version>
+				<configuration>
+					<appName>letshop</appName>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
-
 </project>
