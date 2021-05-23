@@ -1,38 +1,25 @@
 package com.letshop.api.entity;
 
+import lombok.Data;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity(name = "Item")
 @Table(
         name = "Item"
 )
+@Data
 public class Item {
 
     @Id
-    @SequenceGenerator(
-            name="item_sequence",
-            sequenceName = "item_sequence",
-            allocationSize = 1 // How much the sequence increases
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "item_sequence"
-    )
+    @Column(name = "item_id", updatable = false)
+    private Long item_id;
 
-    @Column(name = "id", updatable = false)
-    private Long id;
-
-    @Column(name = "name", nullable = false)
+    @Column(name = "title", nullable = false)
     private String name;
-
-    @Column(name = "category", nullable = false)
-    private String category;
 
     @Column(name = "price", nullable = false)
     private double price;
@@ -40,48 +27,43 @@ public class Item {
     @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(name = "unit_remaining", nullable = false)
-    private int unitRemaining;
+    @Column(name = "category", nullable = false)
+    private String category;
 
-    @Column(name = "unit_sold", nullable = false)
-    private int unitSold;
+    @Column(name = "image", nullable = false)
+    private String image;
+
+    @Column(name = "weight", nullable = false)
+    private String weight;
 
     public Item() {
     }
 
-    public Item(Long id, String name, String category, double price, String description, int unitRemaining,
-                int unitSold) {
-        this.id = id;
-        this.name = name;
-        this.category = category;
+    public Item(Long item_id, String title, double price, String description, String category, String image,
+                String weight) {
+        this.item_id = item_id;
+        this.name = title;
         this.price = price;
         this.description = description;
-        this.unitRemaining = unitRemaining;
-        this.unitSold = unitSold;
+        this.category = category;
+        this.image = image;
+        this.weight = weight;
     }
 
-    public Long getId() {
-        return id;
+    public Long getItem_id() {
+        return item_id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setItem_id(Long item_id) {
+        this.item_id = item_id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
+    public void setName(String title) {
+        this.name = title;
     }
 
     public double getPrice() {
@@ -100,21 +82,19 @@ public class Item {
         this.description = description;
     }
 
-    public int getUnitRemaining() {
-        return unitRemaining;
+    public String getCategory() {
+        return category;
     }
 
-    public void setUnitRemaining(int unitRemaining) {
-        this.unitRemaining = unitRemaining;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
-    public int getUnitSold() {
-        return unitSold;
+    public String getImage() {
+        return image;
     }
 
-    public void setUnitSold(int unitSold) {
-        this.unitSold = unitSold;
+    public void setImage(String image) {
+        this.image = image;
     }
-
-
 }
