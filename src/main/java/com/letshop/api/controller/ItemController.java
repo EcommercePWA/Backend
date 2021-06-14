@@ -2,18 +2,17 @@ package com.letshop.api.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.letshop.api.entity.Item;
-import com.letshop.api.exception.ItemNotFoundException;
-import com.letshop.api.repository.ItemRepository;
+import com.letshop.api.service.ItemService;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -21,23 +20,23 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @RestController
 public class ItemController {
 
-    private final ItemRepository itemRepository;
+    private static final Logger LOGGER = LoggerFactory.getLogger(ItemController.class);
 
-    public ItemController(ItemRepository itemRepository) {
-        this.itemRepository = itemRepository;
+    private final ItemService itemService;
+
+    public ItemController(ItemService itemService) {
+        this.itemService = itemService;
     }
-    // https://shopee.sg/search?keyword=pc&order=desc&page=0&sortBy=price
+
 
     @GetMapping("/items")
     public List<Item> getItems() {
-        return itemRepository.findAll();
+        return itemService.findAll();
     }
 
     @GetMapping("/items/{id}")
     public EntityModel<Item> getItem(@PathVariable long id) {
-        Item item = itemRepository.findById(id)
-                .orElseThrow(() -> new ItemNotFoundException(id));
-
+        Item item = itemService.getItem(id);
         EntityModel<Item> entityModel = EntityModel.of(item);
         WebMvcLinkBuilder linkTo = linkTo(methodOn(ItemController.class).getItems());
         entityModel.add(linkTo.withRel("all-items"));
@@ -46,15 +45,18 @@ public class ItemController {
 
     @DeleteMapping("/items/{id}")
     public void deleteItem(@PathVariable long id) {
-        itemRepository.deleteById(id);
+        itemService.deleteItem(id);
     }
 
-    @GetMapping("/search")
-    public List<Item> searchItems(@RequestParam String keyword,
-                                  @RequestParam String order,
-                                  @RequestParam String page,
-                                  @RequestParam String sortBy) {
-        return itemRepository.findAll();
-    }
+
+    // https://shopee.sg/search?keyword=pc&order=desc&page=0&sortBy=price
+    //
+    // @GetMapping("/search")
+    // public List<Item> searchItems(@RequestParam String keyword,
+    //                               @RequestParam String order,
+    //                               @RequestParam String page,
+    //                               @RequestParam String sortBy) {
+    //     return itemService.findAll();
+    // }
 
 }

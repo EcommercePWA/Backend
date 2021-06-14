@@ -7,18 +7,19 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "Cart")
+// TODO: Think of proper design for customer cart, item review
+@Entity(name = "CustomerCart")
+@Table(name = "customer_cart")
 @Data
-public class Cart {
+public class CustomerCart {
 
     @Id
     @Column(name = "cust_id", updatable = false)
-    private Long cust_id;
+    private Long custId;
 
     @Column(name = "item_id", nullable = false)
-    private String item_id;
+    private String itemId;
 
-    @Column(name = "amount", nullable = false)
+    @Column(name = "amount", nullable = false, precision = 2)
     private int amount;
 }

@@ -16,7 +16,7 @@ public class Item {
 
     @Id
     @Column(name = "item_id", updatable = false)
-    private Long item_id;
+    private Long itemId;
 
     @Column(name = "title", nullable = false)
     private String name;
@@ -24,7 +24,7 @@ public class Item {
     @Column(name = "price", nullable = false)
     private double price;
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "description", nullable = false, columnDefinition = "TEXT")
     private String description;
 
     @Column(name = "category", nullable = false)
@@ -34,67 +34,14 @@ public class Item {
     private String image;
 
     @Column(name = "weight", nullable = false)
-    private String weight;
+    private double weight;
 
-    public Item() {
-    }
+    @Column(name = "stock", nullable = false)
+    private int stock;
 
-    public Item(Long item_id, String title, double price, String description, String category, String image,
-                String weight) {
-        this.item_id = item_id;
-        this.name = title;
-        this.price = price;
-        this.description = description;
-        this.category = category;
-        this.image = image;
-        this.weight = weight;
-    }
+    @Column(name = "units_sold", nullable = false)
+    private int unitsSold;
 
-    public Long getItem_id() {
-        return item_id;
-    }
-
-    public void setItem_id(Long item_id) {
-        this.item_id = item_id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String title) {
-        this.name = title;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
+    @Column(name = "num_ratings", nullable = false)
+    private int numRatings;
 }

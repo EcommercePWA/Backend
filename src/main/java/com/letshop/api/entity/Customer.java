@@ -6,20 +6,24 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "User")
+@Table(
+        name = "User",
+        uniqueConstraints = @UniqueConstraint(name = "unique_email", columnNames = "email")
+)
 @Data
-public class User {
+public class Customer {
 
     @Id
     @Column(name = "cust_id", updatable = false)
-    private Long cust_id;
+    private Long custId;
 
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "name", nullable = false)
-    private int units_sold;
+    @Column(name = "units_sold", nullable = false)
+    private int unitsSold;
 
 }
